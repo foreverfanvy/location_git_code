@@ -19,6 +19,16 @@ vector *newList(int n){
     return p;
 }
 
+//to expand the space of the data area
+int expand(vector *v){
+    if(v==NULL)return 0;
+    //NULL can not be expand
+    vector *p=realloc(v->data,sizeof(v->size)*2);
+    //To expand the memory two multiple size of it used to be
+    if(p==NULL)return 0;
+    return 1;
+}
+
 //to insert an number into the list
 int insert(vector *v,int pos,int val){
     //the temp must releated to the position and value
@@ -60,17 +70,6 @@ int earse(vector *v,int pos){
     return 1;
 }
 
-//to expand the space of the data area
-int expand(vector *v){
-    if(v==NULL)return 0;
-    //NULL can not be expand
-    vector *p=realloc(v->data,sizeof(v->size)*2);
-    //To expand the memory two multiple size of it used to be
-    if(p==NULL)return 0;
-    return 1;
-}
-
-
 int main(void){
     vector *v = newList(5);
     insert(v, 0, 10);
@@ -89,11 +88,8 @@ int main(void){
         printf("%d ", v->data[i]);
     }
     printf("\n");
-
     clear(v);
     return 0;
-
-  
 }
 
 //编码出现的问题
@@ -104,4 +100,5 @@ int main(void){
     4.realloc 需要判断是否成功分配内存。
     5.else if(v->size==v->count)没有判断，顺序表装满的情况没有考虑
     6.for(int i=pos;i<v->count-1;i++)边界条件是count-1不是count
+    7.insert函数中使用了expand，expand应该在insert上方位置才可以
 */
