@@ -68,10 +68,41 @@ void output(Node *head){
     return;
 }
 
+//查找操作
+int find(Node *head,int val){
+    Node*p=head;
+    int pos=0;
+    if(head==NULL)return 0;
+    //遍历查找
+    while(p){
+        if(p->val!=val){
+            p=p->next;
+            pos++;
+        }
+        else break;
+    }
+    if(p==NULL){
+        printf("404\nNot found");
+        return 0;
+    }
+    for(int i=0;i<pos;i++){
+		printf("     ");
+			}
+		printf("^\n");
+	for(int i=0;i<pos;i++){
+		printf("     ");
+			}
+	    printf("|\n");
+		printf("The %d is found at seq %d\n",val,pos);
+		return 1;
+
+}
+
+
 //随机检测
-int main(){
+int main(void){
     srand(time(0));
-    #define MAX_OP 20
+    #define MAX_OP 10
     Node *head=NULL;
     for(int i=0;i<MAX_OP;i++){
         int pos=rand()%(i+1),val=rand()%100;
@@ -79,10 +110,15 @@ int main(){
         head=insert(head,pos,val);
         output(head);
     }
+    int num;
+    scanf("%d",&num);
+    find(head,num);
     return 0;
 }
 
 /*
     1.clear函数中的不能写成死循环for(Node *p=head,*q;;p=q)中间加上p--for(Node *p=head,*q;p;p=q)当p为NULL（释放完成后退出）
     2.struct Node *next;不能写出Node *next；在结构体定义内部引用自身时，需要使用struct关键字
+    3.不能int num=scanf("%d",&num);scanf的返回值是0或者1，所以会出现bug
+    4.
 */
