@@ -1,0 +1,33 @@
+[_setup_]
+port=COM5
+baudrate=9600
+
+width=1000
+height=200
+background_color= white
+
+grid_h_origin =100
+grid_h_step = 10
+grid_h_color = #EEE
+grid_h_origin color = #CCC
+
+grid_v_origin = 100
+grid_v_step = 10
+grid_v_color = #EEE
+grid_v_origin color=transparent
+
+[_default_]
+min=-20
+max=500
+
+[ch1]
+color = green
+
+[ch2]
+color = yellow
+
+[ch3]
+color = blue
+
+[ch4]
+color = red
