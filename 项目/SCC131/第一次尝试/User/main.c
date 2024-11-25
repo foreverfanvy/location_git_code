@@ -1,5 +1,3 @@
-
-
 #include "./SYSTEM/sys/sys.h"
 #include "./SYSTEM/usart/usart.h"
 #include "./SYSTEM/delay/delay.h"
@@ -21,7 +19,6 @@
  * @param       x2,y2: 终点坐标
  * @param       size : 线条粗细程度
  * @param       color: 线的颜色
- * @retval      无
  */
 void lcd_draw_bline(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t size, uint16_t color)
 {
@@ -100,7 +97,7 @@ void lcd_draw_bline(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
 #define MOVE_STEP 2     // 每次移动的像素数(必须能被AXIS_LENGTH整除)
 
 float g_amplitude = 50.0f;   // 振幅，可调节
-float g_frequency = 1.0f;    // 频率，可调节
+float g_frequency = 12.0f;    // 周期，可调节
 float g_phase = 0.0f;        // 相位，用于移动
 uint16_t g_wave_buffer[AXIS_LENGTH];  // 波形缓冲区
 
@@ -315,7 +312,7 @@ int main(void)
     lcd_init();                             /* 初始化LCD */
     key_init();                             /* 初始化按键 */
 		dma_init(DMA1_Channel4);                /* 初始化串口1 TX DMA */
-
+		
 
     lcd_show_string(30, 50, 400, 32, 32, "STM32F103ZET6", RED);
     lcd_show_string(30, 90, 400, 32, 32, "Yaojingxi 23722032", RED);
@@ -342,34 +339,7 @@ int main(void)
     lcd_show_string(30, 170, 400, 32, 32, "You can use key0", RED);
 		delay_ms(1000);
 		lcd_clear(WHITE);
-    len = sizeof(TEXT_TO_SEND);
-    k = 0;
-    
-    for (i = 0; i < SEND_BUF_SIZE; i++) /* 填充ASCII字符集数据 */
-    {
-        if (k >= len)   /* 入换行符 */
-        {
-            if (mask)
-            {
-                g_sendbuf[i] = 0x0a;
-                k = 0;
-            }
-            else
-            {
-                g_sendbuf[i] = 0x0d;
-                mask++;
-            }
-        }
-        else     /* 复制TEXT_TO_SEND语句 */
-        {
-            mask = 0;
-            g_sendbuf[i] = TEXT_TO_SEND[k];
-            k++;
-        }
-    }
- 
-    i = 0;
-
+		
     while (1)
     {
         key = key_scan(0);
@@ -403,7 +373,6 @@ int main(void)
             lcd_show_num(30, 150, 100, 3, 16, BLUE);    /* 显示100% */
             lcd_show_string(30, 130, 200, 16, 16, "Transimit Finished!", BLUE); /* 提示传送完成 */
 						delay_ms(1000);
-							
 						
     }
 }
