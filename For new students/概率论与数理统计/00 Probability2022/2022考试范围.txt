@@ -1,1 +1,0 @@
-跟2020年考试范围相比，增加了Chebyshev不等式，但是减掉了正态分布衍生分布：Chi-square,t,F分布。2020年考试范围在Knowledge points文件中。
